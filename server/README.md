@@ -21,78 +21,74 @@
   <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
   [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
 
-## Description
+# API Documentation
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+## Overview
 
-## Project setup
+This API is built using the [NestJS](https://nestjs.com/) framework, a progressive Node.js framework for building efficient and scalable server-side applications. The API provides endpoints for managing users, tasks, and authentication.
+
+## Features
+
+- **User Management**: Create, update, and manage user data.
+- **Task Management**: Create, update, and manage tasks.
+- **Authentication**: Secure endpoints using JWT-based authentication.
+
+## Project Setup
+
+To set up the project locally, follow these steps:
 
 ```bash
+# Install dependencies
 $ npm install
-```
 
-## Compile and run the project
-
-```bash
-# development
-$ npm run start
-
-# watch mode
+# Start the development server
 $ npm run start:dev
 
-# production mode
+# Run in production mode
 $ npm run start:prod
 ```
 
-## Run tests
+## API Endpoints
+
+### Authentication
+
+- **POST /auth/login**: Authenticate a user and return a JWT token.
+- **POST /auth/register**: Register a new user.
+
+### Users
+
+- **GET /users**: Retrieve a list of all users.
+- **GET /users/:id**: Retrieve details of a specific user.
+- **POST /users**: Create a new user.
+- **PUT /users/:id**: Update an existing user.
+- **DELETE /users/:id**: Delete a user.
+
+### Tasks
+
+- **GET /tasks**: Retrieve a list of all tasks.
+- **GET /tasks/:id**: Retrieve details of a specific task.
+- **POST /tasks**: Create a new task.
+- **PUT /tasks/:id**: Update an existing task.
+- **DELETE /tasks/:id**: Delete a task.
+
+## Running Tests
+
+To ensure the API works as expected, you can run the following tests:
 
 ```bash
-# unit tests
+# Run unit tests
 $ npm run test
 
-# e2e tests
+# Run end-to-end tests
 $ npm run test:e2e
 
-# test coverage
+# Check test coverage
 $ npm run test:cov
 ```
 
-## Deployment
-
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
-
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
-
-```bash
-$ npm install -g @nestjs/mau
-$ mau deploy
-```
-
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
-
 ## Resources
 
-Check out a few resources that may come in handy when working with NestJS:
-
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
-
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
+- **Documentation**: [NestJS Documentation](https://docs.nestjs.com)
 ## License
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+This project is [MIT licensed](https://opensource.org/licenses/MIT).
