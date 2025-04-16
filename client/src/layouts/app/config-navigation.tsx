@@ -28,6 +28,11 @@ export function useNavData() {
             path: paths.app.tasks.completed,
             icon: <Icon icon="material-symbols:done" width="24" height="24" />,
           },
+          {
+            title: "pdf Task",
+            path: paths.app.tasks.pdf,
+            icon: <Icon icon="teenyicons:pdf-solid" width="15" height="15" />,
+          },
         ],
       },
     ],
