@@ -1,20 +1,20 @@
-'use client';
+"use client";
 
-import { useEffect, useReducer, useCallback, useMemo } from 'react';
+import { useEffect, useReducer, useCallback, useMemo } from "react";
 // utils
-import axiosInstance, { endpoints } from '@/utils/axios';
+import axiosInstance, { endpoints } from "@/utils/axios";
 
-import { AuthContext } from './auth-context';
-import { isValidToken, setSession } from './utils';
-import { ActionMapType, AuthStateType, AuthUserType } from '../../types';
+import { AuthContext } from "./auth-context";
+import { isValidToken, setSession } from "./utils";
+import { ActionMapType, AuthStateType, AuthUserType } from "../../types";
 
 // ----------------------------------------------------------------------
 
 enum Types {
-  INITIAL = 'INITIAL',
-  LOGIN = 'LOGIN',
-  REGISTER = 'REGISTER',
-  LOGOUT = 'LOGOUT',
+  INITIAL = "INITIAL",
+  LOGIN = "LOGIN",
+  REGISTER = "REGISTER",
+  LOGOUT = "LOGOUT",
 }
 
 type Payload = {
@@ -28,7 +28,6 @@ type Payload = {
     user: AuthUserType;
   };
   [Types.LOGOUT]: undefined;
-
 };
 
 type ActionsType = ActionMapType<Payload>[keyof ActionMapType<Payload>];
@@ -71,12 +70,11 @@ const reducer = (state: AuthStateType, action: ActionsType) => {
 
 // ----------------------------------------------------------------------
 
-const STORAGE_KEY = 'accessToken';
+const STORAGE_KEY = "accessToken";
 
 type Props = {
   children: React.ReactNode;
 };
-
 
 // Initialize Firebase
 
@@ -118,18 +116,21 @@ export function AuthProvider({ children }: Props) {
   }, [initialize]);
 
   // LOGIN
-  const login = useCallback(async (email: string, password: string) => {    
-    const response = await axiosInstance.post(endpoints.auth.login, {
-      email,
-      password,
-    },
-    {
-      headers: {
-        'Content-Type': 'application/json',
+  const login = useCallback(async (email: string, password: string) => {
+    const response = await axiosInstance.post(
+      endpoints.auth.login,
+      {
+        email,
+        password,
       },
-      withCredentials: true,
-    });
-    console.log(response, 'response');
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+        withCredentials: true,
+      },
+    );
+    console.log(response, "response");
 
     console.log(response.data);
     const { accessToken, user } = response.data;
@@ -145,7 +146,7 @@ export function AuthProvider({ children }: Props) {
 
   // REGISTER
   const register = useCallback(
-    async (email: string, password: string, fullName: string, ) => {
+    async (email: string, password: string, fullName: string) => {
       const response = await axiosInstance.post(endpoints.auth.register, {
         email,
         password,
@@ -162,7 +163,7 @@ export function AuthProvider({ children }: Props) {
         payload: { user },
       });
     },
-    []
+    [],
   );
 
   // LOGOUT
@@ -174,26 +175,27 @@ export function AuthProvider({ children }: Props) {
     });
   }, []);
 
-
   // ----------------------------------------------------------------------
 
-  const checkAuthenticated = state.user ? 'authenticated' : 'unauthenticated';
+  const checkAuthenticated = state.user ? "authenticated" : "unauthenticated";
 
-  const status = state.loading ? 'loading' : checkAuthenticated;
+  const status = state.loading ? "loading" : checkAuthenticated;
 
   const contextValue = useMemo(
     () => ({
       user: state.user,
-      method: 'jwt',
-      loading: status === 'loading',
-      authenticated: status === 'authenticated',
-      unauthenticated: status === 'unauthenticated',
+      method: "jwt",
+      loading: status === "loading",
+      authenticated: status === "authenticated",
+      unauthenticated: status === "unauthenticated",
       login,
       register,
       logout,
     }),
-    [login, logout, register, state.user, status]
+    [login, logout, register, state.user, status],
   );
 
-  return <AuthContext.Provider value={contextValue}>{children}</AuthContext.Provider>;
+  return (
+    <AuthContext.Provider value={contextValue}>{children}</AuthContext.Provider>
+  );
 }

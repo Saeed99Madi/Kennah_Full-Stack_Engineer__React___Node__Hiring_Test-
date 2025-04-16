@@ -1,17 +1,17 @@
-'use client';
+"use client";
 
-import { m } from 'framer-motion';
+import { m } from "framer-motion";
 // @mui
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
+import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
 // layouts
-import CompactLayout from '@/layouts/compact';
+import CompactLayout from "@/layouts/compact";
 // routes
-import { RouterLink } from '@/routes/components';
+import { RouterLink } from "@/routes/components";
 // components
-import { MotionContainer, varBounce } from '@/components/animate';
+import { MotionContainer, varBounce } from "@/components/animate";
 // assets
-import { PageNotFoundIllustration } from '@/assets/illustrations';
+import { PageNotFoundIllustration } from "@/assets/illustrations";
 
 // ----------------------------------------------------------------------
 
@@ -26,9 +26,9 @@ export default function NotFoundView() {
         </m.div>
 
         <m.div variants={varBounce().in}>
-          <Typography sx={{ color: 'text.secondary' }}>
-            Sorry, we couldn’t find the page you’re looking for. Perhaps you’ve mistyped the URL? Be
-            sure to check your spelling.
+          <Typography sx={{ color: "text.secondary" }}>
+            Sorry, we couldn’t find the page you’re looking for. Perhaps you’ve
+            mistyped the URL? Be sure to check your spelling.
           </Typography>
         </m.div>
 
@@ -41,7 +41,12 @@ export default function NotFoundView() {
           />
         </m.div>
 
-        <Button component={RouterLink} href="/" size="large" variant="contained">
+        <Button
+          component={RouterLink}
+          href="/"
+          size="large"
+          variant="contained"
+        >
           Go to Home
         </Button>
       </MotionContainer>

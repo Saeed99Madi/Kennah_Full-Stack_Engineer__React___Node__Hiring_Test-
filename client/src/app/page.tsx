@@ -1,8 +1,8 @@
-import { redirect } from 'next/navigation';
+import { redirect } from "next/navigation";
 // config
 import "react-datepicker/dist/react-datepicker.css";
 
-import { PATH_AFTER_LOGIN } from '@/config-global';
+import { PATH_AFTER_LOGIN } from "@/config-global";
 
 // ----------------------------------------------------------------------
 

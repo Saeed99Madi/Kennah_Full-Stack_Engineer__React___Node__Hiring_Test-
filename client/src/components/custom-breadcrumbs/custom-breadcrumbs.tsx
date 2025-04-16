@@ -1,10 +1,10 @@
-import Box from '@mui/material/Box';
-import Link from '@mui/material/Link';
-import Stack from '@mui/material/Stack';
-import Typography from '@mui/material/Typography';
-import Breadcrumbs from '@mui/material/Breadcrumbs';
-import { SxProps } from '@mui/material/styles';
-import { RouterLink } from '@/routes/components';
+import Box from "@mui/material/Box";
+import Link from "@mui/material/Link";
+import Stack from "@mui/material/Stack";
+import Typography from "@mui/material/Typography";
+import Breadcrumbs from "@mui/material/Breadcrumbs";
+import { SxProps } from "@mui/material/styles";
+import { RouterLink } from "@/routes/components";
 
 type TLink = {
   href?: string;
@@ -30,8 +30,8 @@ export default function CustomBreadcrumbs({ links, heading, sx }: Props) {
             <Link
               key={link.name}
               component={RouterLink}
-              href={link.href || '#'}
-              sx={{ display: 'flex', alignItems: 'center' }}
+              href={link.href || "#"}
+              sx={{ display: "flex", alignItems: "center" }}
             >
               {link.icon && <Box sx={{ mr: 1 }}>{link.icon}</Box>}
               {link.name}

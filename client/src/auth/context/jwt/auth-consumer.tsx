@@ -1,8 +1,8 @@
-'use client';
+"use client";
 // components
-import { SplashScreen } from '@/components/loading-screen';
+import { SplashScreen } from "@/components/loading-screen";
 //
-import { AuthContext } from './auth-context';
+import { AuthContext } from "./auth-context";
 
 // ----------------------------------------------------------------------
 

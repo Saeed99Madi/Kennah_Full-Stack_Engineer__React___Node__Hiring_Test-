@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
 // @mui
-import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
-import { LocalizationProvider as MuiLocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
+import { LocalizationProvider as MuiLocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 // ----------------------------------------------------------------------
 
 type Props = {
@@ -10,5 +10,9 @@ type Props = {
 };
 
 export default function LocalizationProvider({ children }: Props) {
-  return <MuiLocalizationProvider dateAdapter={AdapterDateFns}>{children}</MuiLocalizationProvider>;
+  return (
+    <MuiLocalizationProvider dateAdapter={AdapterDateFns}>
+      {children}
+    </MuiLocalizationProvider>
+  );
 }

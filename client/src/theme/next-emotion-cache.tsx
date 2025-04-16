@@ -1,15 +1,18 @@
-'use client';
+"use client";
 
-import * as React from 'react';
-import createCache from '@emotion/cache';
-import { useServerInsertedHTML } from 'next/navigation';
-import { CacheProvider as DefaultCacheProvider } from '@emotion/react';
-import type { EmotionCache, Options as OptionsOfCreateCache } from '@emotion/cache';
+import * as React from "react";
+import createCache from "@emotion/cache";
+import { useServerInsertedHTML } from "next/navigation";
+import { CacheProvider as DefaultCacheProvider } from "@emotion/react";
+import type {
+  EmotionCache,
+  Options as OptionsOfCreateCache,
+} from "@emotion/cache";
 
 // ----------------------------------------------------------------------
 
 type NextAppDirEmotionCacheProviderProps = {
-  options: Omit<OptionsOfCreateCache, 'insertionPoint'>;
+  options: Omit<OptionsOfCreateCache, "insertionPoint">;
   CacheProvider?: (props: {
     value: EmotionCache;
     children: React.ReactNode;
@@ -17,7 +20,9 @@ type NextAppDirEmotionCacheProviderProps = {
   children: React.ReactNode;
 };
 
-export default function NextAppDirEmotionCacheProvider(props: NextAppDirEmotionCacheProviderProps) {
+export default function NextAppDirEmotionCacheProvider(
+  props: NextAppDirEmotionCacheProviderProps,
+) {
   const { options, CacheProvider = DefaultCacheProvider, children } = props;
 
   const [registry] = React.useState(() => {
@@ -30,7 +35,7 @@ export default function NextAppDirEmotionCacheProvider(props: NextAppDirEmotionC
       if (cache.inserted[serialized.name] === undefined) {
         inserted.push({
           name: serialized.name,
-          isGlobal: selector === '',
+          isGlobal: selector === "",
         });
       }
       return prevInsert(...args);
@@ -48,7 +53,7 @@ export default function NextAppDirEmotionCacheProvider(props: NextAppDirEmotionC
     if (inserted.length === 0) {
       return null;
     }
-    let styles = '';
+    let styles = "";
     let dataEmotionAttribute = registry.cache.key;
 
     const globals: {
@@ -59,7 +64,7 @@ export default function NextAppDirEmotionCacheProvider(props: NextAppDirEmotionC
     inserted.forEach(({ name, isGlobal }) => {
       const style = registry.cache.inserted[name];
 
-      if (typeof style !== 'boolean' && style !== undefined) {
+      if (typeof style !== "boolean" && style !== undefined) {
         if (isGlobal) {
           globals.push({ name, style });
         } else {
@@ -79,7 +84,7 @@ export default function NextAppDirEmotionCacheProvider(props: NextAppDirEmotionC
             dangerouslySetInnerHTML={{ __html: style }}
           />
         ))}
-        {styles !== '' && (
+        {styles !== "" && (
           <style
             data-emotion={dataEmotionAttribute}
             // eslint-disable-next-line react/no-danger

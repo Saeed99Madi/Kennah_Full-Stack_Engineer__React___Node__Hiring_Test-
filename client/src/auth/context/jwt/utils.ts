@@ -1,20 +1,20 @@
 // routes
-import { paths } from '@/routes/paths';
+import { paths } from "@/routes/paths";
 // utils
-import axios from '@/utils/axios';
-import Cookies from 'js-cookie';
+import axios from "@/utils/axios";
+import Cookies from "js-cookie";
 
 // ----------------------------------------------------------------------
 
 function jwtDecode(token: string) {
-  const base64Url = token.split('.')[1];
-  const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+  const base64Url = token.split(".")[1];
+  const base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
   const jsonPayload = decodeURIComponent(
     window
       .atob(base64)
-      .split('')
+      .split("")
       .map((c) => `%${`00${c.charCodeAt(0).toString(16)}`.slice(-2)}`)
-      .join('')
+      .join(""),
   );
 
   return JSON.parse(jsonPayload);
@@ -47,9 +47,9 @@ export const tokenExpired = (exp: number) => {
   clearTimeout(expiredTimer);
 
   expiredTimer = setTimeout(() => {
-    alert('Token expired');
+    alert("Token expired");
 
-    Cookies.remove('accessToken');
+    Cookies.remove("accessToken");
 
     window.location.href = paths.auth.jwt.login;
   }, timeLeft);
