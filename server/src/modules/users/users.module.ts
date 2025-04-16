@@ -10,6 +10,6 @@ import { UsersService } from './users.service';
   ],
   controllers: [UsersController],
   providers: [UsersService],
-  exports: [UsersService],
+  exports: [UsersService, MongooseModule], // Export MongooseModule
 })
 export class UsersModule {}

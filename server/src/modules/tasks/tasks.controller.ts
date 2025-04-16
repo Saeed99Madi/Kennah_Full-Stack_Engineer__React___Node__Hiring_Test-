@@ -14,14 +14,18 @@ import {
   Param,
   Body,
   UseGuards,
+  Req,
+  BadRequestException,
+  Patch,
 } from '@nestjs/common';
 import { JwtAuthGuard } from '../auth/jwt/jwt-auth.guard';
 import { TasksService } from './tasks.service';
 import { CreateTaskDto } from './dto/CreateTaskDto';
+import { UpdateTaskDto } from './dto/UpdateTaskDto';
 
 @ApiTags('Tasks')
 @ApiBearerAuth()
-@Controller('api/tasks')
+@Controller('tasks')
 @UseGuards(JwtAuthGuard)
 export class TasksController {
   constructor(private readonly tasksService: TasksService) {}
@@ -44,8 +48,12 @@ export class TasksController {
       },
     },
   })
-  createTask(@Body() createTaskDto: CreateTaskDto) {
-    return this.tasksService.createTask(createTaskDto);
+  createTask(@Body() createTaskDto: CreateTaskDto, @Req() req) {
+    const userId = req.user.userId;
+    if (!userId) {
+      throw new BadRequestException('Unauthorized');
+    }
+    return this.tasksService.createTask({ ...createTaskDto, userId });
   }
 
   @Get()
@@ -54,8 +62,27 @@ export class TasksController {
     status: 200,
     description: 'List of tasks retrieved successfully.',
   })
-  getTasks() {
-    return this.tasksService.getTasks();
+  getTasks(@Req() req) {
+    const userId = req.user.userId;
+    if (!userId) {
+      throw new BadRequestException('Unauthorized');
+    }
+    return this.tasksService.getTasks(userId);
+  }
+
+  @Get('today')
+  @ApiOperation({ summary: 'Get tasks for today' })
+  @ApiResponse({
+    status: 200,
+    description: 'List of tasks for today retrieved successfully.',
+  })
+  async getTodayTasks(@Req() req) {
+    const userId = req.user.userId;
+    if (!userId) {
+      throw new BadRequestException('Unauthorized');
+    }
+
+    return await this.tasksService.getTodayTasks(userId);
   }
 
   @Get(':id')
@@ -84,15 +111,42 @@ export class TasksController {
       },
     },
   })
-  updateTask(@Param('id') id: string, @Body() updateTaskDto) {
-    return this.tasksService.updateTask(id, updateTaskDto);
+  updateTask(
+    @Param('id') id: string,
+    @Body() updateTaskDto: UpdateTaskDto,
+    @Req() req,
+  ) {
+    const userId = req.user.userId;
+    if (!userId) {
+      throw new BadRequestException('Unauthorized');
+    }
+    return this.tasksService.updateTask(id, updateTaskDto, userId);
   }
 
   @Delete(':id')
   @ApiOperation({ summary: 'Delete a task' })
   @ApiResponse({ status: 200, description: 'Task deleted successfully.' })
   @ApiResponse({ status: 404, description: 'Task not found.' })
-  deleteTask(@Param('id') id: string) {
-    return this.tasksService.deleteTask(id);
+  async deleteTask(@Param('id') id: string, @Req() req) {
+    const userId = req.user.userId;
+    if (!userId) {
+      throw new BadRequestException('Unauthorized');
+    }
+    return await this.tasksService.deleteTask(id);
+  }
+
+  @Patch(':id')
+  @ApiOperation({ summary: 'Update task status to completed' })
+  @ApiResponse({
+    status: 200,
+    description: 'Task status updated successfully.',
+  })
+  @ApiResponse({ status: 404, description: 'Task not found.' })
+  async updateTaskStatus(@Param('id') id: string, @Req() req) {
+    const userId = req.user.userId;
+    if (!userId) {
+      throw new BadRequestException('Unauthorized');
+    }
+    return await this.tasksService.updateTaskStatus(id, userId);
   }
 }
