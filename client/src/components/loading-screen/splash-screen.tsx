@@ -1,9 +1,9 @@
-import { m } from 'framer-motion';
+import { m } from "framer-motion";
 // @mui
-import { alpha } from '@mui/material/styles';
-import Box, { BoxProps } from '@mui/material/Box';
+import { alpha } from "@mui/material/styles";
+import Box, { BoxProps } from "@mui/material/Box";
 //
-import Logo from '../logo';
+import Logo from "../logo";
 
 // ----------------------------------------------------------------------
 
@@ -16,11 +16,11 @@ export default function SplashScreen({ sx, ...other }: BoxProps) {
         bottom: 0,
         height: 1,
         zIndex: 9998,
-        display: 'flex',
-        position: 'fixed',
-        alignItems: 'center',
-        justifyContent: 'center',
-        bgcolor: 'background.default',
+        display: "flex",
+        position: "fixed",
+        alignItems: "center",
+        justifyContent: "center",
+        bgcolor: "background.default",
         ...sx,
       }}
       {...other}
@@ -33,12 +33,12 @@ export default function SplashScreen({ sx, ...other }: BoxProps) {
           }}
           transition={{
             duration: 2,
-            ease: 'easeInOut',
+            ease: "easeInOut",
             repeatDelay: 1,
             repeat: Infinity,
           }}
         >
-          <Logo disabledLink sx={{ width: '100%', height: '100%' }} />
+          <Logo disabledLink sx={{ width: "100%", height: "100%" }} />
         </m.div>
 
         <Box
@@ -47,14 +47,15 @@ export default function SplashScreen({ sx, ...other }: BoxProps) {
             scale: [1.6, 1, 1, 1.6, 1.6],
             rotate: [270, 0, 0, 270, 270],
             opacity: [0.25, 1, 1, 1, 0.25],
-            borderRadius: ['25%', '25%', '50%', '50%', '25%'],
+            borderRadius: ["25%", "25%", "50%", "50%", "25%"],
           }}
-          transition={{ ease: 'linear', duration: 3.2, repeat: Infinity }}
+          transition={{ ease: "linear", duration: 3.2, repeat: Infinity }}
           sx={{
             width: 100,
             height: 100,
-            position: 'absolute',
-            border: (theme) => `solid 3px ${alpha(theme.palette.primary.dark, 0.24)}`,
+            position: "absolute",
+            border: (theme) =>
+              `solid 3px ${alpha(theme.palette.primary.dark, 0.24)}`,
           }}
         />
 
@@ -64,18 +65,19 @@ export default function SplashScreen({ sx, ...other }: BoxProps) {
             scale: [1, 1.2, 1.2, 1, 1],
             rotate: [0, 270, 270, 0, 0],
             opacity: [1, 0.25, 0.25, 0.25, 1],
-            borderRadius: ['25%', '25%', '50%', '50%', '25%'],
+            borderRadius: ["25%", "25%", "50%", "50%", "25%"],
           }}
           transition={{
-            ease: 'linear',
+            ease: "linear",
             duration: 3.2,
             repeat: Infinity,
           }}
           sx={{
             width: 120,
             height: 120,
-            position: 'absolute',
-            border: (theme) => `solid 8px ${alpha(theme.palette.primary.dark, 0.24)}`,
+            position: "absolute",
+            border: (theme) =>
+              `solid 8px ${alpha(theme.palette.primary.dark, 0.24)}`,
           }}
         />
       </>

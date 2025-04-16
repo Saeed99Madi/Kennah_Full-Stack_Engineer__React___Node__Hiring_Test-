@@ -1,4 +1,8 @@
-import { LogoutOptions, RedirectLoginOptions, PopupLoginOptions } from '@auth0/auth0-react';
+import {
+  LogoutOptions,
+  RedirectLoginOptions,
+  PopupLoginOptions,
+} from "@auth0/auth0-react";
 
 // ----------------------------------------------------------------------
 
@@ -29,7 +33,7 @@ type CanRemove = {
     email: string,
     password: string,
     firstName: string,
-    lastName: string
+    lastName: string,
   ) => Promise<void>;
   //
   loginWithGoogle?: () => Promise<void>;
@@ -47,7 +51,12 @@ export type JWTContextType = CanRemove & {
   authenticated: boolean;
   unauthenticated: boolean;
   login: (email: string, password: string) => Promise<void>;
-  register: (email: string, password: string, firstName: string, lastName: string) => Promise<void>;
+  register: (
+    email: string,
+    password: string,
+    firstName: string,
+    lastName: string,
+  ) => Promise<void>;
   logout: () => Promise<void>;
 };
 
@@ -62,7 +71,7 @@ export type AmplifyContextType = CanRemove & {
     email: string,
     password: string,
     firstName: string,
-    lastName: string
+    lastName: string,
   ) => Promise<unknown>;
   logout: () => Promise<unknown>;
 };

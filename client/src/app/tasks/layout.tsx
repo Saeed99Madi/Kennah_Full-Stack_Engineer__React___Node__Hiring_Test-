@@ -1,10 +1,10 @@
-'use client';
+"use client";
 
 // auth
-import { AuthGuard } from '@/auth/guard';
+import { AuthGuard } from "@/auth/guard";
 // components
-import DashboardLayout from '@/layouts/app';
-import 'react-lazy-load-image-component/src/effects/blur.css';
+import DashboardLayout from "@/layouts/app";
+import "react-lazy-load-image-component/src/effects/blur.css";
 import "react-datepicker/dist/react-datepicker.css";
 // ----------------------------------------------------------------------
 
