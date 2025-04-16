@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import { SnackbarProvider } from 'notistack';
+import { SnackbarProvider } from "notistack";
 
 type Props = {
   children: React.ReactNode;
@@ -11,7 +11,7 @@ export function Providers({ children }: Props) {
     <SnackbarProvider
       maxSnack={5}
       autoHideDuration={3000}
-      anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+      anchorOrigin={{ vertical: "top", horizontal: "right" }}
     >
       {children}
     </SnackbarProvider>

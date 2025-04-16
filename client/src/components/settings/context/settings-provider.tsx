@@ -1,14 +1,14 @@
-'use client';
+"use client";
 
-import isEqual from 'lodash/isEqual';
-import { useEffect, useMemo, useCallback, useState } from 'react';
+import isEqual from "lodash/isEqual";
+import { useEffect, useMemo, useCallback, useState } from "react";
 // hooks
 // utils
-import { useLocalStorage } from '@/hooks/use-local-storage';
-import { localStorageGetItem } from '@/utils/storage-available';
+import { useLocalStorage } from "@/hooks/use-local-storage";
+import { localStorageGetItem } from "@/utils/storage-available";
 //
-import { SettingsValueProps } from '../types';
-import { SettingsContext } from './settings-context';
+import { SettingsValueProps } from "../types";
+import { SettingsContext } from "./settings-context";
 
 // ----------------------------------------------------------------------
 
@@ -17,16 +17,19 @@ type SettingsProviderProps = {
   defaultSettings: SettingsValueProps;
 };
 
-export function SettingsProvider({ children, defaultSettings }: SettingsProviderProps) {
+export function SettingsProvider({
+  children,
+  defaultSettings,
+}: SettingsProviderProps) {
   const [openDrawer, setOpenDrawer] = useState(false);
 
-  const [settings, setSettings] = useLocalStorage('settings', defaultSettings);
+  const [settings, setSettings] = useLocalStorage("settings", defaultSettings);
 
-  const isArabic = localStorageGetItem('i18nextLng') === 'ar';
+  const isArabic = localStorageGetItem("i18nextLng") === "ar";
 
   useEffect(() => {
     if (isArabic) {
-      onChangeDirectionByLang('ar');
+      onChangeDirectionByLang("ar");
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isArabic]);
@@ -38,15 +41,15 @@ export function SettingsProvider({ children, defaultSettings }: SettingsProvider
         [name]: value,
       }));
     },
-    [setSettings]
+    [setSettings],
   );
 
   // Direction by lang
   const onChangeDirectionByLang = useCallback(
     (lang: string) => {
-      onUpdate('themeDirection', lang === 'ar' ? 'rtl' : 'ltr');
+      onUpdate("themeDirection", lang === "ar" ? "rtl" : "ltr");
     },
-    [onUpdate]
+    [onUpdate],
   );
 
   // Reset
@@ -88,8 +91,12 @@ export function SettingsProvider({ children, defaultSettings }: SettingsProvider
       onCloseDrawer,
       onToggleDrawer,
       onChangeDirectionByLang,
-    ]
+    ],
   );
 
-  return <SettingsContext.Provider value={memoizedValue}>{children}</SettingsContext.Provider>;
+  return (
+    <SettingsContext.Provider value={memoizedValue}>
+      {children}
+    </SettingsContext.Provider>
+  );
 }

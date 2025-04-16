@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import { Controller, useFormContext } from 'react-hook-form';
+import { Controller, useFormContext } from "react-hook-form";
 import {
   Box,
   Chip,
@@ -10,14 +10,14 @@ import {
   SelectProps,
   FormControl,
   InputLabel,
-} from '@mui/material';
+} from "@mui/material";
 
 interface Option {
   value: string;
   label: string;
 }
 
-interface Props extends Omit<SelectProps, 'value'> {
+interface Props extends Omit<SelectProps, "value"> {
   name: string;
   label?: string;
   options: Option[];
@@ -36,7 +36,7 @@ export default function RHFMultiSelect({
   ...other
 }: Props) {
   const { control } = useFormContext();
-  console.log(options, 'options');
+  console.log(options, "options");
 
   return (
     <Controller
@@ -55,11 +55,13 @@ export default function RHFMultiSelect({
             renderValue={(value: unknown) => {
               const selected = value as string[];
               return (
-                <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
+                <Box sx={{ display: "flex", flexWrap: "wrap", gap: 0.5 }}>
                   {selected.map((valuee) => (
                     <Chip
                       key={valuee}
-                      label={options.find((option) => option.value === valuee)?.label}
+                      label={
+                        options.find((option) => option.value === valuee)?.label
+                      }
                     />
                   ))}
                 </Box>
@@ -69,7 +71,9 @@ export default function RHFMultiSelect({
           >
             {options.map((option) => (
               <MenuItem key={option.value} value={option.value}>
-                {checkbox && <Checkbox checked={field.value?.indexOf(option.value) > -1} />}
+                {checkbox && (
+                  <Checkbox checked={field.value?.indexOf(option.value) > -1} />
+                )}
                 {option.label}
               </MenuItem>
             ))}

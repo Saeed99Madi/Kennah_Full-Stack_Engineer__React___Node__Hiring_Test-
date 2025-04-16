@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
 // auth
-import { GuestGuard } from 'src/auth/guard';
+import { GuestGuard } from "src/auth/guard";
 // components
-import AuthClassicLayout from 'src/layouts/auth/classic';
+import AuthClassicLayout from "src/layouts/auth/classic";
 
 // ----------------------------------------------------------------------
 

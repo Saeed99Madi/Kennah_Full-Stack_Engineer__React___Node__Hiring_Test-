@@ -9,10 +9,10 @@
   "parserOptions": {
     "ecmaVersion": "latest",
     "sourceType": "module",
-    "project": "./client/tsconfig.json",
+    "project": "./tsconfig.json",
     "baseUrl": "./",
     "paths": {
-      "@/*": ["client/src/*"]
+      "@/*": ["src/*"]
     }
   },
   "plugins": ["@typescript-eslint", "react", "unused-imports"],
@@ -30,7 +30,8 @@
     "no-console": ["warn", { "allow": ["warn", "error"] }],
     "@typescript-eslint/no-explicit-any": "off",
     "unused-imports/no-unused-imports": "warn",
-    "react/react-in-jsx-scope": "off"
+    "react/react-in-jsx-scope": "off",
+    "@typescript-eslint/no-unused-vars": "warn"
   },
   "settings": {
     "react": {

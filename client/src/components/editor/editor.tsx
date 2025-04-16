@@ -1,14 +1,14 @@
-import 'src/utils/highlight';
-import dynamic from 'next/dynamic';
+import "src/utils/highlight";
+import dynamic from "next/dynamic";
 // @mui
-import { alpha } from '@mui/material/styles';
-import Skeleton from '@mui/material/Skeleton';
+import { alpha } from "@mui/material/styles";
+import Skeleton from "@mui/material/Skeleton";
 //
-import { EditorProps } from './types';
-import { StyledEditor } from './styles';
-import Toolbar, { formats } from './toolbar';
+import { EditorProps } from "./types";
+import { StyledEditor } from "./styles";
+import Toolbar, { formats } from "./toolbar";
 
-const ReactQuill = dynamic(() => import('react-quill'), {
+const ReactQuill = dynamic(() => import("react-quill"), {
   ssr: false,
   loading: () => (
     <Skeleton
@@ -18,7 +18,7 @@ const ReactQuill = dynamic(() => import('react-quill'), {
         right: 0,
         bottom: 0,
         height: 1,
-        position: 'absolute',
+        position: "absolute",
         borderRadius: 1,
       }}
     />
@@ -28,7 +28,7 @@ const ReactQuill = dynamic(() => import('react-quill'), {
 // ----------------------------------------------------------------------
 
 export default function Editor({
-  id = 'minimal-quill',
+  id = "minimal-quill",
   error,
   simple = false,
   helperText,
@@ -56,7 +56,7 @@ export default function Editor({
         sx={{
           ...(error && {
             border: (theme) => `solid 1px ${theme.palette.error.main}`,
-            '& .ql-editor': {
+            "& .ql-editor": {
               bgcolor: (theme) => alpha(theme.palette.error.main, 0.08),
             },
           }),

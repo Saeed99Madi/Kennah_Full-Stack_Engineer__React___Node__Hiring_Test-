@@ -1,20 +1,24 @@
-'use client';
+"use client";
 
 // import merge from 'lodash/merge';
-import { useMemo } from 'react';
+import { useMemo } from "react";
 // @mui
-import CssBaseline from '@mui/material/CssBaseline';
-import { createTheme, ThemeProvider as MuiThemeProvider, ThemeOptions } from '@mui/material/styles';
+import CssBaseline from "@mui/material/CssBaseline";
+import {
+  createTheme,
+  ThemeProvider as MuiThemeProvider,
+  ThemeOptions,
+} from "@mui/material/styles";
 // system
-import { palette } from './palette';
-import { shadows } from './shadows';
-import { typography } from './typography';
-import { customShadows } from './custom-shadows';
-import { componentsOverrides } from './overrides';
+import { palette } from "./palette";
+import { shadows } from "./shadows";
+import { typography } from "./typography";
+import { customShadows } from "./custom-shadows";
+import { componentsOverrides } from "./overrides";
 // options
-import RTL from './options/right-to-left';
+import RTL from "./options/right-to-left";
 //
-import NextAppDirEmotionCacheProvider from './next-emotion-cache';
+import NextAppDirEmotionCacheProvider from "./next-emotion-cache";
 
 // ----------------------------------------------------------------------
 
@@ -23,31 +27,27 @@ type Props = {
 };
 
 export default function ThemeProvider({ children }: Props) {
-
   const baseOption = useMemo(
     () => ({
-      palette: palette('light'),
-      shadows: shadows('light'),
-      customShadows: customShadows('light'),
+      palette: palette("light"),
+      shadows: shadows("light"),
+      customShadows: customShadows("light"),
       typography,
       shape: { borderRadius: 8 },
     }),
-    []
+    [],
   );
 
-  const memoizedValue = useMemo(
-    () => (baseOption) ,
-    [baseOption]
-  );
+  const memoizedValue = useMemo(() => baseOption, [baseOption]);
 
   const theme = createTheme(memoizedValue as ThemeOptions);
 
   theme.components = componentsOverrides(theme);
 
   return (
-    <NextAppDirEmotionCacheProvider options={{ key: 'css' }}>
+    <NextAppDirEmotionCacheProvider options={{ key: "css" }}>
       <MuiThemeProvider theme={theme}>
-        <RTL themeDirection={'ltr'}>
+        <RTL themeDirection={"ltr"}>
           <CssBaseline />
           {children}
         </RTL>

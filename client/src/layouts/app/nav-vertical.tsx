@@ -1,22 +1,22 @@
-'use client';
+"use client";
 
-import { useEffect } from 'react';
+import { useEffect } from "react";
 // @mui
-import Box from '@mui/material/Box';
-import Stack from '@mui/material/Stack';
-import Drawer from '@mui/material/Drawer';
+import Box from "@mui/material/Box";
+import Stack from "@mui/material/Stack";
+import Drawer from "@mui/material/Drawer";
 // hooks
-import { useResponsive } from '@/hooks/use-responsive';
+import { useResponsive } from "@/hooks/use-responsive";
 // hooks
 // components
-import Logo from '@/components/logo';
-import Scrollbar from '@/components/scrollbar';
-import { usePathname } from '@/routes/hook';
-import { NavSectionVertical } from '@/components/nav-section';
+import Logo from "@/components/logo";
+import Scrollbar from "@/components/scrollbar";
+import { usePathname } from "@/routes/hook";
+import { NavSectionVertical } from "@/components/nav-section";
 //
-import { NAV } from '../config-layout';
-import { useNavData } from './config-navigation';
-import { NavToggleButton } from '../_common';
+import { NAV } from "../config-layout";
+import { useNavData } from "./config-navigation";
+import { NavToggleButton } from "../_common";
 
 // ----------------------------------------------------------------------
 
@@ -26,10 +26,9 @@ type Props = {
 };
 
 export default function NavVertical({ openNav, onCloseNav }: Props) {
-
   const pathname = usePathname();
 
-  const lgUp = useResponsive('up', 'lg');
+  const lgUp = useResponsive("up", "lg");
 
   const navData = useNavData();
 
@@ -44,10 +43,10 @@ export default function NavVertical({ openNav, onCloseNav }: Props) {
     <Scrollbar
       sx={{
         height: 1,
-        '& .simplebar-content': {
+        "& .simplebar-content": {
           height: 1,
-          display: 'flex',
-          flexDirection: 'column',
+          display: "flex",
+          flexDirection: "column",
         },
       }}
     >
@@ -56,12 +55,11 @@ export default function NavVertical({ openNav, onCloseNav }: Props) {
       <NavSectionVertical
         data={navData}
         config={{
-          currentRole: 'admin',
+          currentRole: "admin",
         }}
       />
 
       <Box sx={{ flexGrow: 1 }} />
-
     </Scrollbar>
   );
 
@@ -79,7 +77,7 @@ export default function NavVertical({ openNav, onCloseNav }: Props) {
         <Stack
           sx={{
             height: 1,
-            position: 'fixed',
+            position: "fixed",
             width: NAV.W_VERTICAL,
             borderRight: (theme) => `dashed 1px ${theme.palette.divider}`,
           }}

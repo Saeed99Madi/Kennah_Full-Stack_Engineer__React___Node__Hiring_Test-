@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import { createContext } from 'react';
-import { AuthUserType } from '../../types';
+import { createContext } from "react";
+import { AuthUserType } from "../../types";
 
 export type JWTContextType = {
   user: AuthUserType;
@@ -10,7 +10,11 @@ export type JWTContextType = {
   authenticated: boolean;
   unauthenticated: boolean;
   login: (email: string, password: string) => Promise<void>;
-  register: (email: string, password: string, fullName: string) => Promise<void>;
+  register: (
+    email: string,
+    password: string,
+    fullName: string,
+  ) => Promise<void>;
   logout: () => Promise<void>;
 };
 

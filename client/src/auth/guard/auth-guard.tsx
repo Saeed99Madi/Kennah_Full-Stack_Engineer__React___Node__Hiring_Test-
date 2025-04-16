@@ -1,9 +1,9 @@
-import { useEffect, useCallback, useState } from 'react';
+import { useEffect, useCallback, useState } from "react";
 // routes
-import { paths } from '@/routes/paths';
-import { useRouter } from '@/routes/hook';
+import { paths } from "@/routes/paths";
+import { useRouter } from "@/routes/hook";
 //
-import { useAuthContext } from '../hooks';
+import { useAuthContext } from "../hooks";
 
 // ----------------------------------------------------------------------
 

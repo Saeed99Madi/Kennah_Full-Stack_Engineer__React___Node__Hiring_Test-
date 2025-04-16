@@ -1,12 +1,12 @@
-'use client';
+"use client";
 
-import dynamic from 'next/dynamic';
-import { LazyMotion, m } from 'framer-motion';
+import dynamic from "next/dynamic";
+import { LazyMotion, m } from "framer-motion";
 
 // ----------------------------------------------------------------------
 
 // eslint-disable-next-line import/extensions
-const loadFeatures = () => import('./features.js').then((res) => res.default);
+const loadFeatures = () => import("./features.js").then((res) => res.default);
 
 type Props = {
   children: React.ReactNode;
@@ -15,7 +15,7 @@ type Props = {
 function MotionLazy({ children }: Props) {
   return (
     <LazyMotion strict features={loadFeatures}>
-      <m.div style={{ height: '100%' }}> {children} </m.div>
+      <m.div style={{ height: "100%" }}> {children} </m.div>
     </LazyMotion>
   );
 }
