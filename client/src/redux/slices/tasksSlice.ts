@@ -118,9 +118,12 @@ export const unCompleatTask = createAsyncThunk(
   "tasks/unCompleatTask",
   async (taskId: string, { rejectWithValue }) => {
     try {
-      const { data } = await axiosInstance.patch(`/tasks/un-complete/${taskId}`, {
-        completed: false,
-      });
+      const { data } = await axiosInstance.patch(
+        `/tasks/un-complete/${taskId}`,
+        {
+          completed: false,
+        },
+      );
       return data;
     } catch (error) {
       return rejectWithValue(error);
