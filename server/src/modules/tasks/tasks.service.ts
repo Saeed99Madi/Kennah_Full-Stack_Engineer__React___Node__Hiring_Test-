@@ -1,4 +1,8 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Task } from './schemas/task.schema';
@@ -14,8 +18,13 @@ export class TasksService {
     return await newTask.save();
   }
 
-  async getTasks(): Promise<Task[]> {
-    return await this.taskModel.find().exec();
+  async getTasks(userId: string): Promise<Task[]> {
+    return await this.taskModel
+      .find({
+        userId: userId,
+        status: 'pending',
+      })
+      .exec();
   }
 
   async getTaskById(id: string): Promise<Task> {
@@ -26,20 +35,70 @@ export class TasksService {
     return task;
   }
 
-  async updateTask(id: string, updateTaskDto: UpdateTaskDto): Promise<Task> {
+  async updateTask(
+    id: string,
+    updateTaskDto: UpdateTaskDto,
+    userId,
+  ): Promise<Task[]> {
+    const checkAuth = await this.taskModel
+      .findOne({
+        _id: id,
+        userId: userId,
+      })
+      .exec();
+    if (!checkAuth) {
+      throw new BadRequestException(`Unauthorized`);
+    }
+
     const updatedTask = await this.taskModel
-      .findByIdAndUpdate(id, updateTaskDto, { new: true })
+      .findByIdAndUpdate(id, updateTaskDto)
       .exec();
     if (!updatedTask) {
       throw new NotFoundException(`Task with ID ${id} not found`);
     }
-    return updatedTask;
+    return await this.getTasks(userId);
   }
 
-  async deleteTask(id: string): Promise<void> {
+  async deleteTask(id: string): Promise<{ _id: string }> {
     const result = await this.taskModel.findByIdAndDelete(id).exec();
     if (!result) {
       throw new NotFoundException(`Task with ID ${id} not found`);
     }
+    return { _id: id };
+  }
+
+  async updateTaskStatus(id: string, userId: string): Promise<Task> {
+    const task = await this.taskModel.findById(id).exec();
+    if (!task) {
+      throw new NotFoundException(`Task with not found`);
+    }
+    if (userId !== task.userId) {
+      throw new BadRequestException(`Unauthorized`);
+    }
+    await this.taskModel.updateOne(
+      { _id: id },
+      { $set: { status: 'completed' } },
+    );
+
+    return await this.getTaskById(id);
+  }
+
+  async getTodayTasks(userId: string): Promise<Task[]> {
+    const startOfDay = new Date();
+    startOfDay.setHours(0, 0, 0, 0);
+
+    const endOfDay = new Date();
+    endOfDay.setHours(23, 59, 59, 999);
+
+    return await this.taskModel
+      .find({
+        userId: userId,
+        status: 'pending',
+        dueDate: {
+          $gte: startOfDay,
+          $lt: endOfDay,
+        },
+      })
+      .exec();
   }
 }
