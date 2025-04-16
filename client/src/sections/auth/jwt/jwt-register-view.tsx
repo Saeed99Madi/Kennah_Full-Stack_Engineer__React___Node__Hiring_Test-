@@ -29,6 +29,7 @@ import {
   StyledAuthWrapper,
   SubmitButton,
 } from "src/components/auth-components";
+import { useTheme } from "@mui/material";
 
 // ----------------------------------------------------------------------
 
@@ -156,6 +157,7 @@ export default function JwtRegisterView() {
         />
 
         <SubmitButton
+          theme={useTheme()}
           fullWidth
           color="inherit"
           size="large"
@@ -181,6 +183,7 @@ export default function JwtRegisterView() {
 
   return (
     <StyledAuthWrapper
+      theme={useTheme()}
       sx={{
         p: 4,
       }}

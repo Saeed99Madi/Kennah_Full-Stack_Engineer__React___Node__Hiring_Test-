@@ -27,6 +27,7 @@ import Iconify from "src/components/iconify";
 import FormProvider, { RHFTextField } from "@/components/hook-form";
 import { Icon } from "@iconify/react";
 import { StyledAuthWrapper, SubmitButton } from "@/components/auth-components";
+import { useTheme } from "@mui/material";
 
 // ----------------------------------------------------------------------
 
@@ -42,6 +43,8 @@ export default function JwtLoginView() {
   const returnTo = searchParams.get("returnTo");
 
   const password = useBoolean();
+
+  const theme = useTheme();
 
   const LoginSchema = Yup.object().shape({
     email: Yup.string()
@@ -119,6 +122,7 @@ export default function JwtLoginView() {
       />
       <SubmitButton
         fullWidth
+        theme={theme}
         color="inherit"
         size="large"
         type="submit"
@@ -155,6 +159,7 @@ export default function JwtLoginView() {
       sx={{
         p: 4,
       }}
+      theme={theme}
     >
       <FormProvider methods={methods} onSubmit={onSubmit}>
         {renderHead}
