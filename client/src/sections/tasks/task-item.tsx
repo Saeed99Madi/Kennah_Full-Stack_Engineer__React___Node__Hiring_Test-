@@ -7,16 +7,20 @@ import {
   handleOpen,
   setEditMode,
   setEditTask,
+  unCompleatTask,
 } from "@/redux/slices/tasksSlice";
 import { ITasks } from "@/types/tasks";
 import { fDate } from "@/utils/format-time";
 import { LoadingButton } from "@mui/lab";
 import { Box, Checkbox, MenuItem, Typography } from "@mui/material";
+import { useRouter } from "next/navigation";
 
 export const TaskItem = ({ task }: { task: ITasks }) => {
   const popover = usePopover();
   const dispatch = useAppDispatch();
   const CLoading = useAppSelector((state) => state.TaskSlice.CLoading);
+
+  const router = useRouter();
   const isToday = (date: Date) => {
     const today = new Date();
     return fDate(today, "dd MMM") === fDate(date, "dd MMM");
@@ -24,7 +28,11 @@ export const TaskItem = ({ task }: { task: ITasks }) => {
 
   const handleCompleted = async () => {
     try {
-      await dispatch(compleatTask(task._id as string));
+      if (task.status === "completed") {
+        await dispatch(unCompleatTask(task._id as string));
+      } else {
+        await dispatch(compleatTask(task._id as string));
+      }
     } catch (error) {
       console.error("Error marking task as completed:", error);
     }
@@ -68,6 +76,7 @@ export const TaskItem = ({ task }: { task: ITasks }) => {
               onChange={handleCompleted}
               sx={{ p: 0.5 }}
               color="success"
+              checked={task.status === "completed"}
             />
           )}
         </LoadingButton>
@@ -130,6 +139,15 @@ export const TaskItem = ({ task }: { task: ITasks }) => {
           >
             <Iconify icon="solar:pen-bold" />
             Edit
+          </MenuItem>
+
+          <MenuItem
+            onClick={async () => {
+              router.push(`/tasks/view/${task._id}`);
+            }}
+          >
+            <Iconify icon="solar:eye-bold" />
+            view
           </MenuItem>
         </CustomPopover>
       </Box>

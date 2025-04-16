@@ -4,13 +4,16 @@ import { Container } from "@mui/material";
 import { useSettingsContext } from "src/components/settings";
 import CustomBreadcrumbs from "src/components/custom-breadcrumbs";
 import { paths } from "src/routes/paths";
-import TasksList from "../tasks-list";
 import { usePathname } from "next/navigation";
+import { useAppSelector } from "@/redux/hooks";
+import { SplashScreen } from "@/components/loading-screen";
+import TasksDetails from "../task-details";
 
-export default function TaskListView() {
+export default function TaskView() {
+  const { currentTask, loading } = useAppSelector((task) => task.TaskSlice);
   const settings = useSettingsContext();
   const pathname = usePathname();
-
+  if (loading) return <SplashScreen />;
   return (
     <Container maxWidth={settings.themeStretch ? false : "lg"}>
       <CustomBreadcrumbs
@@ -19,13 +22,11 @@ export default function TaskListView() {
         }
         links={[
           { name: "Tasks", href: paths.app.root },
-          ...(pathname.includes("in-box")
-            ? [{ name: "in-Box", href: paths.app.tasks.inBox }]
-            : []),
+          { name: "Details", href: paths.app.tasks.view },
         ]}
         sx={{ mb: { xs: 3, md: 5 } }}
       />
-      <TasksList />
+      {currentTask && <TasksDetails currentTask={currentTask} />}
     </Container>
   );
 }
