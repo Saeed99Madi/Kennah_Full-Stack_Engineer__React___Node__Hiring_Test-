@@ -70,6 +70,21 @@ export class TasksController {
     return this.tasksService.getTasks(userId);
   }
 
+  @Get('completed')
+  @ApiOperation({ summary: 'Get completed tasks' })
+  @ApiResponse({
+    status: 200,
+    description: 'List of completed tasks retrieved successfully.',
+  })
+  async getCompletedTasks(@Req() req) {
+    const userId = req.user.userId;
+    if (!userId) {
+      throw new BadRequestException('Unauthorized');
+    }
+
+    return await this.tasksService.getCompletedTasks(userId);
+  }
+
   @Get('today')
   @ApiOperation({ summary: 'Get tasks for today' })
   @ApiResponse({
@@ -148,5 +163,20 @@ export class TasksController {
       throw new BadRequestException('Unauthorized');
     }
     return await this.tasksService.updateTaskStatus(id, userId);
+  }
+
+  @Patch('un-complete/:id')
+  @ApiOperation({ summary: 'Update task status to pending' })
+  @ApiResponse({
+    status: 200,
+    description: 'Task status updated successfully.',
+  })
+  @ApiResponse({ status: 404, description: 'Task not found.' })
+  async unCompleteTask(@Param('id') id: string, @Req() req) {
+    const userId = req.user.userId;
+    if (!userId) {
+      throw new BadRequestException('Unauthorized');
+    }
+    return await this.tasksService.unCompleteTask(id, userId);
   }
 }

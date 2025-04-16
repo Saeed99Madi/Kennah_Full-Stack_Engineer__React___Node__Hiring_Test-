@@ -102,6 +102,44 @@ export const fetchToDaysTasks = createAsyncThunk(
   },
 );
 
+export const fetchTaskById = createAsyncThunk(
+  "tasks/fetchTaskById",
+  async (taskId: string, { rejectWithValue }) => {
+    try {
+      const { data } = await axiosInstance.get(`/tasks/${taskId}`);
+      return data;
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  },
+);
+
+export const unCompleatTask = createAsyncThunk(
+  "tasks/unCompleatTask",
+  async (taskId: string, { rejectWithValue }) => {
+    try {
+      const { data } = await axiosInstance.patch(`/tasks/un-complete/${taskId}`, {
+        completed: false,
+      });
+      return data;
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  },
+);
+
+export const fetchCompletedTasks = createAsyncThunk(
+  "tasks/fetchCompletedTasks",
+  async (_, { rejectWithValue }) => {
+    try {
+      const { data } = await axiosInstance.get("/tasks/completed");
+      return data;
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  },
+);
+
 const TaskSlice = createSlice({
   name: "tasks",
   initialState,
@@ -205,6 +243,42 @@ const TaskSlice = createSlice({
       })
       .addCase(fetchToDaysTasks.rejected, (state, action) => {
         state.loader = false;
+        state.error = action.payload as string;
+      })
+      .addCase(fetchTaskById.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(fetchTaskById.fulfilled, (state, action) => {
+        state.loading = false;
+        state.currentTask = action.payload;
+      })
+      .addCase(fetchTaskById.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload as string;
+      })
+      .addCase(fetchCompletedTasks.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(fetchCompletedTasks.fulfilled, (state, action) => {
+        state.loading = false;
+        state.tasks = action.payload;
+      })
+      .addCase(fetchCompletedTasks.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload as string;
+      })
+      .addCase(unCompleatTask.pending, (state) => {
+        state.CLoading = true;
+        state.error = null;
+      })
+      .addCase(unCompleatTask.fulfilled, (state, action) => {
+        state.CLoading = false;
+        state.tasks = action.payload;
+      })
+      .addCase(unCompleatTask.rejected, (state, action) => {
+        state.CLoading = false;
         state.error = action.payload as string;
       });
   },

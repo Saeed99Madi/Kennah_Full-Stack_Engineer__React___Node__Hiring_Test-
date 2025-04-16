@@ -21,6 +21,9 @@ export const paths = {
     root: ROOTS.App,
     tasks: {
       create: `${ROOTS.App}/create`,
+      view: `${ROOTS.App}/view/:id`,
+      inBox: `${ROOTS.App}/in-box`,
+      completed: `${ROOTS.App}/completed`,
     },
     inBox: `${ROOTS.App}/in-box`,
     two: `${ROOTS.App}/two`,

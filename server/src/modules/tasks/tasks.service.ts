@@ -101,4 +101,29 @@ export class TasksService {
       })
       .exec();
   }
+
+  async getCompletedTasks(userId: string): Promise<Task[]> {
+    return await this.taskModel
+      .find({
+        userId: userId,
+        status: 'completed',
+      })
+      .exec();
+  }
+
+  async unCompleteTask(id: string, userId: string): Promise<Task> {
+    const task = await this.taskModel.findById(id).exec();
+    if (!task) {
+      throw new NotFoundException(`Task with not found`);
+    }
+    if (userId !== task.userId) {
+      throw new BadRequestException(`Unauthorized`);
+    }
+    await this.taskModel.updateOne(
+      { _id: id },
+      { $set: { status: 'pending' } },
+    );
+
+    return await this.getTaskById(id);
+  }
 }

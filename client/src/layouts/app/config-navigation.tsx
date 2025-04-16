@@ -20,8 +20,13 @@ export function useNavData() {
           },
           {
             title: "In Box",
-            path: paths.app.inBox,
+            path: paths.app.tasks.inBox,
             icon: <Icon icon="solar:inbox-bold" width="24" height="24" />,
+          },
+          {
+            title: "Completed",
+            path: paths.app.tasks.completed,
+            icon: <Icon icon="material-symbols:done" width="24" height="24" />,
           },
         ],
       },
