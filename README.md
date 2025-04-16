@@ -101,6 +101,10 @@ Ensure you have the following installed on your system:
 
 ---
 
+## PDF Tasks
+ - the image slider task is inside the ToDo app on `http://localhost:8084/tasks/pdf-task/`
+ - the second is in the root of the project on `queue.js.js` you can run it with `node queue.js`
+
 ## Notes
 
 - Replace `<your_mongodb_connection_string>` and `<your_jwt_secret>` with appropriate values.
