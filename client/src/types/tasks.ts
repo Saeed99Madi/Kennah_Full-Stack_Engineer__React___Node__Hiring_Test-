@@ -1,6 +1,7 @@
 export interface ITasks {
   title: string;
-  id: string;
+  _id?: string;
   description: string;
   dueDate: Date;
-} 
+  status?: string;
+}

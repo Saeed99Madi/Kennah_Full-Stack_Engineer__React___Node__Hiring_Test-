@@ -1,29 +1,29 @@
 // @mui
-import { useTheme } from '@mui/material/styles';
-import Stack from '@mui/material/Stack';
-import AppBar from '@mui/material/AppBar';
-import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
+import { useTheme } from "@mui/material/styles";
+import Stack from "@mui/material/Stack";
+import AppBar from "@mui/material/AppBar";
+import Toolbar from "@mui/material/Toolbar";
+import IconButton from "@mui/material/IconButton";
 //utils
-import { useResponsive } from '@/hooks/use-responsive';
-import { useOffSetTop } from '@/hooks/use-off-set-top';
+import { useResponsive } from "@/hooks/use-responsive";
+import { useOffSetTop } from "@/hooks/use-off-set-top";
 
 // theme
-import { bgBlur } from '@/theme/css';
+import { bgBlur } from "@/theme/css";
 // import { useRouter } from '@/routes/hook';
 
 // components
-import Logo from '@/components/logo';
-import SvgColor from '@/components/svg-color';
-import { useSettingsContext } from '@/components/settings';
+
+import Logo from "@/components/logo";
+import { useSettingsContext } from "@/components/settings";
 //
-import { HEADER, NAV } from '../config-layout';
-import {
-  AccountPopover,
-} from '../_common';
-import { Button } from '@mui/material';
-import { Icon } from '@iconify/react/dist/iconify.js';
-import { useRouter } from 'next/navigation';
+import { HEADER, NAV } from "../config-layout";
+import { AccountPopover } from "../_common";
+import { Button } from "@mui/material";
+import { Icon } from "@iconify/react/dist/iconify.js";
+import { useAppDispatch } from "@/redux/hooks";
+import { handleOpen } from "@/redux/slices/tasksSlice";
+import Iconify from "@/components/iconify";
 
 // ----------------------------------------------------------------------
 
@@ -33,16 +33,15 @@ type Props = {
 
 export default function Header({ onOpenNav }: Props) {
   const theme = useTheme();
-
-  const router = useRouter();
+  const dispatch = useAppDispatch();
 
   const settings = useSettingsContext();
 
-  const isNavHorizontal = settings.themeLayout === 'horizontal';
+  const isNavHorizontal = settings.themeLayout === "horizontal";
 
-  const isNavMini = settings.themeLayout === 'mini';
+  const isNavMini = settings.themeLayout === "mini";
 
-  const lgUp = useResponsive('up', 'lg');
+  const lgUp = useResponsive("up", "lg");
 
   const offset = useOffSetTop(HEADER.H_DESKTOP);
 
@@ -54,7 +53,11 @@ export default function Header({ onOpenNav }: Props) {
 
       {!lgUp && (
         <IconButton onClick={onOpenNav}>
-          <SvgColor src="/assets/icons/navbar/ic_menu_item.svg" />
+          <Iconify
+            color={theme.palette.primary.main}
+            width={16}
+            icon="fontisto:nav-icon-list-a"
+          />{" "}
         </IconButton>
       )}
 
@@ -65,21 +68,18 @@ export default function Header({ onOpenNav }: Props) {
         justifyContent="flex-end"
         spacing={{ xs: 0.5, sm: 1 }}
       >
-
         <Button
-          // onClick={settings.onOpenSetting}
           sx={{
-            color: 'primary.main',
+            color: "primary.main",
           }}
           onClick={() => {
-            router.push('/tasks/create');
+            dispatch(handleOpen());
           }}
-          >
-            Create Task
-            <Icon icon="gridicons:create" width="24" height="24" />
-          </Button>
+        >
+          Create Task
+          <Icon icon="gridicons:create" width="24" height="24" />
+        </Button>
         <AccountPopover />
-
       </Stack>
     </>
   );
@@ -92,7 +92,7 @@ export default function Header({ onOpenNav }: Props) {
         ...bgBlur({
           color: theme.palette.background.default,
         }),
-        transition: theme.transitions.create(['height'], {
+        transition: theme.transitions.create(["height"], {
           duration: theme.transitions.duration.shorter,
         }),
         ...(lgUp && {
@@ -103,7 +103,7 @@ export default function Header({ onOpenNav }: Props) {
           }),
           ...(isNavHorizontal && {
             width: 1,
-            bgcolor: 'background.default',
+            bgcolor: "background.default",
             height: HEADER.H_DESKTOP_OFFSET,
             borderBottom: `dashed 1px ${theme.palette.divider}`,
           }),

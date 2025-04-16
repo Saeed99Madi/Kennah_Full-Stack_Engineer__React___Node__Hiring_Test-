@@ -4,6 +4,3 @@ export interface IUser {
   fullName: string;
   avatarUrl?: string;
 }
-
-
-

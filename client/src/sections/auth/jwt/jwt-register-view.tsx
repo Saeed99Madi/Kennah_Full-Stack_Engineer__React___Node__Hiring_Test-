@@ -81,7 +81,7 @@ export default function JwtRegisterView() {
 
   const renderHead = (
     <Stack spacing={1} sx={{ mb: 0, p: 0 , alignItems: 'flex-start'}}>
-      <Typography variant="h5">Get started with YOUR PASS</Typography>
+      <Typography variant="h5">Get started with your account</Typography>
 
       <Stack direction="row" spacing={1} sx={{ mb: 1 }}>
         <Typography variant="body2">Already have an account?</Typography>

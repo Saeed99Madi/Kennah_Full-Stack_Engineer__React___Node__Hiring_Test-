@@ -1,3 +1,3 @@
-declare module 'react-lazy-load-image-component';
+declare module "react-lazy-load-image-component";
 
-declare module 'react-lazy-load-image-component/src/effects/blur.css';
+declare module "react-lazy-load-image-component/src/effects/blur.css";

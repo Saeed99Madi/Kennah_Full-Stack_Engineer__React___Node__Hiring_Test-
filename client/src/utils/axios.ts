@@ -1,19 +1,23 @@
-import axios, { AxiosRequestConfig } from 'axios';
+import axios, { AxiosRequestConfig } from "axios";
 // config
-import { HOST_API } from '@/config-global';
+import { HOST_API } from "@/config-global";
 
 // ----------------------------------------------------------------------
 
-const axiosInstance = axios.create({ baseURL: HOST_API, 
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    withCredentials: true,
-  } );
-  
+const axiosInstance = axios.create({
+  baseURL: HOST_API,
+  headers: {
+    "Content-Type": "application/json",
+  },
+  withCredentials: true,
+});
+
 axiosInstance.interceptors.response.use(
   (res) => res,
-  (error) => Promise.reject((error.response && error.response.data) || 'Something went wrong')
+  (error) =>
+    Promise.reject(
+      (error.response && error.response.data) || "Something went wrong",
+    ),
 );
 
 export default axiosInstance;
@@ -23,12 +27,13 @@ export default axiosInstance;
 export const fetcher = async (args: string | [string, AxiosRequestConfig]) => {
   const [url, config] = Array.isArray(args) ? args : [args];
 
-  const res = await axiosInstance.get(url, { ...config, 
+  const res = await axiosInstance.get(url, {
+    ...config,
     headers: {
-      'Content-Type': 'application/json',
+      "Content-Type": "application/json",
     },
     withCredentials: true,
-   }, );
+  });
 
   return res.data;
 };
@@ -37,10 +42,10 @@ export const fetcher = async (args: string | [string, AxiosRequestConfig]) => {
 
 export const endpoints = {
   auth: {
-    me: '/auth/me',
-    login: '/auth/login',
-    register: '/auth/register',
-    forgotPassword: '/auth/forgot-password',
-    resetPassword: '/auth/reset-password',
+    me: "/auth/me",
+    login: "/auth/login",
+    register: "/auth/register",
+    forgotPassword: "/auth/forgot-password",
+    resetPassword: "/auth/reset-password",
   },
 };

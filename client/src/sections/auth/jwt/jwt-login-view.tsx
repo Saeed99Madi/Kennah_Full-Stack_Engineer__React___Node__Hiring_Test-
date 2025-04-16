@@ -74,7 +74,7 @@ export default function JwtLoginView() {
 
   const renderHead = (
     <Stack spacing={2} sx={{ alignItems: 'flex-start', mb: 4 }}>
-      <Typography variant="h5">Sign in to YOUR PASS</Typography>
+      <Typography variant="h5">Sign in to your account</Typography>
 
       <Stack direction="row" spacing={0.5}>
         <Typography variant="body2">Don&apos;t have an account?</Typography>
