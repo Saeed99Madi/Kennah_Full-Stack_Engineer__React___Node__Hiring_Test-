@@ -16,7 +16,6 @@ export const paths = {
       resetPassword: `${ROOTS.AUTH}/jwt/reset-password`,
     },
   },
-  // DASHBOARD
   app: {
     root: ROOTS.App,
     tasks: {
@@ -24,14 +23,7 @@ export const paths = {
       view: `${ROOTS.App}/view/:id`,
       inBox: `${ROOTS.App}/in-box`,
       completed: `${ROOTS.App}/completed`,
-    },
-    inBox: `${ROOTS.App}/in-box`,
-    two: `${ROOTS.App}/two`,
-    three: `${ROOTS.App}/three`,
-    group: {
-      root: `${ROOTS.App}/group`,
-      five: `${ROOTS.App}/group/five`,
-      six: `${ROOTS.App}/group/six`,
+      pdf: `${ROOTS.App}/pdf-task`,
     },
   },
 };
